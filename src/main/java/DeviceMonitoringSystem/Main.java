@@ -7,42 +7,29 @@ public class Main {
         System.out.println("Welcome to Device Monitoring System.");
 
         List<Device> devices = List.of(
-                new Router("router", "active"),
-                new Sensor("sensor", "active"),
-                new DatabaseServer("DBSever", "Active"),
-                new SmartHub("SmartHub", "active")
-        );
-
-        List<DataSender> datasenders = List.of(
-                new SmartHub("SmartHub2", "Active")
-        );
-
-        List<DataReceiver> datareceivers = List.of(
-                new DatabaseServer("DBSever2", "Active")
+                new Router("router", Device.Status.Active),
+                new Sensor("sensor", Device.Status.Active),
+                new DatabaseServer("DBSever", Device.Status.Active),
+                new SmartHub("SmartHub", Device.Status.Active)
         );
 
 
-        // Connect all devices
         for (Device d : devices) {
+            if (d instanceof DataSender) ((DataSender)d).sendData();
+            if (d instanceof DataReceiver) ((DataReceiver)d).storeData();
+
             d.connect();
-        }
-
-        for (DataSender ds : datasenders) {
-            ds.sendData();
-        }
-
-        for (DataReceiver dr : datareceivers) {
-            dr.storeData();
         }
 
     }
 }
 
 abstract class Device {
+    enum Status { Active, Inactive}
     String id;
-    String status;
+    Status status;
 
-    Device(String id, String status) {
+    Device(String id, Status status) {
         this.id = id;
         this.status = status;
 
@@ -62,7 +49,7 @@ interface DataReceiver {
 }
 
 class Router extends Device{
-    Router (String id, String status) {
+    Router (String id, Status status) {
         super(id, status);
     }
 
@@ -73,7 +60,7 @@ class Router extends Device{
 }
 
 class Sensor extends Device {
-    Sensor (String id, String status) {
+    Sensor (String id, Status status) {
         super(id, status);
     }
 
@@ -84,7 +71,7 @@ class Sensor extends Device {
 }
 
 class DatabaseServer extends Device implements DataReceiver{
-    DatabaseServer(String id, String status) {
+    DatabaseServer(String id, Status status) {
         super(id, status);
     }
 
@@ -100,7 +87,7 @@ class DatabaseServer extends Device implements DataReceiver{
 }
 
 class SmartHub extends Device implements DataSender {
-    SmartHub(String id, String status) {
+    SmartHub(String id, Status status) {
         super(id, status);
     }
 
