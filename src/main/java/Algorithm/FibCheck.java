@@ -1,4 +1,5 @@
-import java.io.*;
+package Algorithm;
+
 import java.util.HashMap;
 
 public class FibCheck {

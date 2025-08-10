@@ -1,3 +1,5 @@
+package Algorithm;
+
 import java.util.function.Supplier;
 
 public class MetricsLogger {
