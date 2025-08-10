@@ -10,9 +10,9 @@ public class BuilderPattern {
 }
 
 class Router {
-    private String id;
-    private String ip;
-    private int maxConnection;
+    private final String id;
+    private final String ip;
+    private final int maxConnection;
 
     private Router(Builder b) {
         this.id = b.id;
@@ -20,6 +20,11 @@ class Router {
         this.maxConnection = b.maxConnection;
 
         System.out.println(this);
+    }
+
+    @Override
+    public String toString() {
+        return "String ID: " + this.id + " " + "IP: " + this.ip + " " + "max Connection: " + this.maxConnection;
     }
 
     public static class Builder {
