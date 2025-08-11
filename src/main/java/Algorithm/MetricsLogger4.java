@@ -40,10 +40,13 @@ public class MetricsLogger4 {
         long end = System.nanoTime();
         long freeMemory = runtime.freeMemory();
 
-        double timeElapsed = (end - start) / 1_000_000.0;
-        double memoryUsed = (totalMemory - freeMemory) / (1024.0 * 1024.0);
 
-        System.out.printf("%s Time Elapsed: %.4fms, Memory Used: %.4fMB%n",label, timeElapsed, memoryUsed);
+        double timeElapsed = (end - start) / 1_000_000.0;
+        double memoryUsed = (totalMemory - freeMemory) / 1024.0;
+
+        // TODO: Make it auto MB or KB or B based on the free memory size;
+
+        System.out.printf("%s Time Elapsed: %.4fms, Memory Used: %.4fKB%n",label, timeElapsed, memoryUsed);
     }
 
     public static <T> T measure(String label, Supplier<T> task) {
@@ -56,9 +59,11 @@ public class MetricsLogger4 {
         long usedMemoryAfter = runtime.totalMemory() - runtime.freeMemory();
 
         double timeElapsed = (end - start) / 1_000_000.0;
-        double memoryUsed = (usedMemoryAfter - usedMemoryBefore) / (1024.0  * 1024.0);
+        double memoryUsed = (usedMemoryAfter - usedMemoryBefore) /  1024.0;
 
-        System.out.printf("%s Time Elapsed: %.4fms, Memory Used: %.4fMB%n", label, timeElapsed, memoryUsed);
+        // TODO: Make it auto MB or KB or B based on the free memory size;
+
+        System.out.printf("%s Time Elapsed: %.4fms, Memory Used: %.4fKB%n", label, timeElapsed, memoryUsed);
 
         return res;
     }
