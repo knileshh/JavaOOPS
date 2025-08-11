@@ -1,5 +1,7 @@
 package Algorithm.Templates;
 
+import Algorithm.MetricsLogger4;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +15,9 @@ public class LongestConsecutiveSubSequence {
 
         System.out.println(longestConsecutiveSubSequence(input));
         System.out.println(longestConsecutiveSubSequenceHashMap(input));
+
+        MetricsLogger4.measure("Sorting: ", () -> longestConsecutiveSubSequence(input));
+        MetricsLogger4.measure("HashSet: ", () -> longestConsecutiveSubSequenceHashMap(input));
     }
 
     static int longestConsecutiveSubSequence(int[] arr) {
