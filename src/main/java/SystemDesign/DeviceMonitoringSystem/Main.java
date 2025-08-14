@@ -1,4 +1,4 @@
-package DeviceMonitoringSystem;
+package SystemDesign.DeviceMonitoringSystem;
 
 import java.util.List;
 

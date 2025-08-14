@@ -1,4 +1,4 @@
-package PetManagement;
+package SystemDesign.PetManagement;
 
 public class Main {
     public static void main(String[] args) {

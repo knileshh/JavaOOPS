@@ -11,7 +11,9 @@ public class LongestConsecutiveSubSequence {
 //        int[] input = new int[]{100, 4, 200, 1, 3, 2};
         // Expected O/P = 4, because length of seq = 4 (1, 2, 3, 4)
 
-        int[] input = new int[]{1, 2, 3, 4, 7, 8, 9, 0};
+//        int[] input = new int[]{1, 2, 3, 4, 7, 8, 9, 0};
+        int[] input = new int[]{1, 2, 3, 4, 7, 8, 9, 0, 12, 14, 16, 17, 19, 20, 22, 11, 13, 26, 30, 44, 65, 50, 5, 3, 43};
+
 
         System.out.println(longestConsecutiveSubSequence(input));
         System.out.println(longestConsecutiveSubSequenceHashMap(input));
@@ -22,13 +24,25 @@ public class LongestConsecutiveSubSequence {
 
     static int longestConsecutiveSubSequence(int[] arr) {
 
+        if (arr.length == 0) return 0;
+
         Arrays.sort(arr);
+        int longest = 1;
+        int currentLen = 1;
 
-        for (int i = 0; i < arr.length - 1; i++) {
-            if (arr[i+1] - arr[i] != 1) return arr[i];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] == arr[i - 1]) {
+                // skip duplicates
+                continue;
+            }
+            if (arr[i] == arr[i - 1] + 1) {
+                currentLen++;
+            } else {
+                longest = Math.max(longest, currentLen);
+                currentLen = 1;
+            }
         }
-
-        return 0;
+        return Math.max(longest, currentLen);
     }
 
     static int longestConsecutiveSubSequenceHashMap(int[] arr) {
