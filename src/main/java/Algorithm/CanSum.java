@@ -1,5 +1,7 @@
 package Algorithm;
 
+import Utility.MetricsLogger;
+
 import java.util.HashMap;
 
 public class CanSum {
@@ -12,14 +14,14 @@ public class CanSum {
             System.out.println("Sum is not possible");
         }
 
-        MetricsLogger4 m4 = new MetricsLogger4();
+        MetricsLogger m4 = new MetricsLogger();
 
-        MetricsLogger4.measure("NORM: canSum",
+        MetricsLogger.measure("NORM: canSum",
                 () -> canSum(450000,
                         new int[]{3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20})
         );
 
-        MetricsLogger4.measure("MEMO: canSum",
+        MetricsLogger.measure("MEMO: canSum",
                 () -> canSumMemoized(450000,
                         new int[]{3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20},
                         new HashMap<>())

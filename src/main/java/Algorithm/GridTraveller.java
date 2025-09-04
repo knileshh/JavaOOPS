@@ -1,5 +1,7 @@
 package Algorithm;
 
+import Utility.MetricsLogger;
+
 import java.util.Map;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -15,8 +17,8 @@ public class GridTraveller {
 
         Map<String, Long> resultMap = new LinkedHashMap<>();
 
-        resultMap.put("Grid Recursion", MetricsLogger4.measure("Grid Norm: ", () -> gridTraveller(18, 18)));
-        resultMap.put("Grid Memo", MetricsLogger4.measure("Grid Memo: ", () -> gridTravellerMemoized(18, 18, new HashMap<>())));
+        resultMap.put("Grid Recursion", MetricsLogger.measure("Grid Norm: ", () -> gridTraveller(18, 18)));
+        resultMap.put("Grid Memo", MetricsLogger.measure("Grid Memo: ", () -> gridTravellerMemoized(18, 18, new HashMap<>())));
 
         System.out.println("\n\nResults : ");
 

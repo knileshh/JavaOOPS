@@ -1,12 +1,12 @@
-package Algorithm;
+package Utility;
 
 import java.util.function.Supplier;
 
-public class MetricsLogger4 {
+public class MetricsLogger {
     public final long start;
     public final Runtime runtime;
 
-    public MetricsLogger4() {
+    public MetricsLogger() {
         start = System.nanoTime();
         runtime = Runtime.getRuntime();
         runtime.gc();
