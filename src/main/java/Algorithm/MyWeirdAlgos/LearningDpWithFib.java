@@ -25,7 +25,6 @@ public class LearningDpWithFib {
             double maxTime = results.stream().mapToDouble(MeasureResult::timeMs).max().orElse(1);
             double maxMemory = results.stream().mapToDouble(MeasureResult::memoryKb).max().orElse(1);
 
-
             results.sort(Comparator.comparingDouble(MeasureResult::timeMs));
 
             System.out.printf("%-15s | %-10s | %-10s | %-10s | %-10s%n", "Algorithm", "Time(ms)", "Time %", "Memory(KB)", "Memory %");
