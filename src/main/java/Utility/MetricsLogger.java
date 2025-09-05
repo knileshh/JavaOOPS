@@ -2,7 +2,10 @@ package Utility;
 
 import java.util.function.Supplier;
 
+
 public class MetricsLogger {
+    public record MeasureResult<T> (String label, T result, double timeMs, double memoryKb) {}
+
     public final long start;
     public final Runtime runtime;
 
@@ -49,7 +52,7 @@ public class MetricsLogger {
         System.out.printf("%s Time Elapsed: %.4fms, Memory Used: %.4fKB%n",label, timeElapsed, memoryUsed);
     }
 
-    public static <T> T measure(String label, Supplier<T> task) {
+    public static <T> MeasureResult<T> measure(String label, Supplier<T> task) {
         Runtime runtime = Runtime.getRuntime();
         runtime.gc();
         long usedMemoryBefore = runtime.totalMemory() - runtime.freeMemory();
@@ -61,10 +64,13 @@ public class MetricsLogger {
         double timeElapsed = (end - start) / 1_000_000.0;
         double memoryUsed = (usedMemoryAfter - usedMemoryBefore) /  1024.0;
 
-        // TODO: Make it auto MB or KB or B based on the free memory size;
+        // TODO: Make it auto MB or KB or B based on the free memory size (wrote the method on paper);
 
         System.out.printf("%s Time Elapsed: %.4fms, Memory Used: %.4fKB%n", label, timeElapsed, memoryUsed);
 
-        return res;
+        // Value returned by the lambda
+        return new MeasureResult<>(label, res, timeElapsed, memoryUsed);
     }
+
+    // TODO: MAJOR!!! The instance-based logger (logTime, logMemory) isn’t thread-safe if reused between threads, but that’s expected.
 }
