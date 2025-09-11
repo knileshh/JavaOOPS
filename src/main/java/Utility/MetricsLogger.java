@@ -53,6 +53,10 @@ public class MetricsLogger {
     }
 
     public static <T> MeasureResult<T> measure(String label, Supplier<T> task) {
+        return measure(label, task, false);
+    }
+
+    public static <T> MeasureResult<T> measure(String label, Supplier<T> task, boolean debug) {
         Runtime runtime = Runtime.getRuntime();
         runtime.gc();
         long usedMemoryBefore = runtime.totalMemory() - runtime.freeMemory();
@@ -66,8 +70,9 @@ public class MetricsLogger {
 
         // TODO: Make it auto MB or KB or B based on the free memory size (wrote the method on paper);
 
-        System.out.printf("%s Time Elapsed: %.4fms, Memory Used: %.4fKB%n", label, timeElapsed, memoryUsed);
-
+        if (debug) {
+            System.out.printf("%s Time Elapsed: %.4fms, Memory Used: %.4fKB%n", label, timeElapsed, memoryUsed);
+        }
         // Value returned by the lambda
         return new MeasureResult<>(label, res, timeElapsed, memoryUsed);
     }

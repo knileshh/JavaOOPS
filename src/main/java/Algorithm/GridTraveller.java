@@ -17,8 +17,8 @@ public class GridTraveller {
 
         Map<String, Long> resultMap = new LinkedHashMap<>();
 
-        resultMap.put("Grid Recursion", MetricsLogger.measure("Grid Norm: ", () -> gridTraveller(18, 18)));
-        resultMap.put("Grid Memo", MetricsLogger.measure("Grid Memo: ", () -> gridTravellerMemoized(18, 18, new HashMap<>())));
+        resultMap.put("Grid Recursion", MetricsLogger.measure("Grid Norm: ", () -> gridTraveller(18, 18)).result());
+        resultMap.put("Grid Memo", MetricsLogger.measure("Grid Memo: ", () -> gridTravellerMemoized(18, 18, new HashMap<>())).result());
 
         System.out.println("\n\nResults : ");
 

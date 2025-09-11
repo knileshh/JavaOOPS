@@ -18,8 +18,8 @@ public class LearningDpWithFib {
             Arrays.fill(arr, -1);
 
             List<MeasureResult<?>> results = new ArrayList<>();
-            results.add(MetricsLogger.measure("DP Fib", () -> fib((30), memo)));
-            results.add(MetricsLogger.measure("DP FibTab", () -> fibTab(30, arr)));
+            results.add(MetricsLogger.measure("DP FibMemo", () -> fib((30), memo)));
+            results.add(MetricsLogger.measure("DP FibTab", () -> fibTab(30, arr), true));
 
             // Now using streams API find the min and max for base
             double maxTime = results.stream().mapToDouble(MeasureResult::timeMs).max().orElse(1);

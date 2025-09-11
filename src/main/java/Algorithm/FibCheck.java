@@ -1,10 +1,11 @@
 package Algorithm;
 
 import java.util.HashMap;
+import Utility.MetricsLogger;
 
 public class FibCheck {
     public static void main(String[] args) {
-          MetricsLogger3 logger = new MetricsLogger3();
+          MetricsLogger logger = new MetricsLogger();
 
 //        HashMap<Integer, Long> hmap = new HashMap<>();
 
@@ -25,8 +26,8 @@ public class FibCheck {
 
 //        logger.logAll();
 
-        MetricsLogger3.measure("Test1", () -> fib(10000, new HashMap<>()));
-        long res = MetricsLogger3.measure("Test 2", () -> fib(4000, new HashMap<>()));
+        MetricsLogger.measure("Test1", () -> fib(10000, new HashMap<>()));
+        MetricsLogger.MeasureResult<Long> res = MetricsLogger.measure("Test 2", () -> fib(4000, new HashMap<>()));
         System.out.println("Log of res: " + res);
     }
 
