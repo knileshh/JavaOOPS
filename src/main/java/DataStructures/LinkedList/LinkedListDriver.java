@@ -25,6 +25,10 @@ public class LinkedListDriver {
 
         System.out.println("Let's print the linked list: " + sl);
 
+        //Intermediate calls
+
+        sl.insertAtIndex(2, 50);
+
     }
 }
 
@@ -123,5 +127,29 @@ class SinglyLinkedList {
         return false;
     }
 
+    // Intermediate Methods (they say)
+
+    void insertAtIndex(int index, int value) {
+        if (index == 0) {
+            insertAtHead(value);
+        } else if (index == this.size()) {
+            insertAtTail(value);
+        } else {
+            Node current = head;
+
+            // Since index will be before size or after 0;
+            for (int i = 1; i < this.size(); i++) {
+                if (i == index) {
+                    Node newNode = new Node(value);
+                    newNode.next = current.next;
+                    current.next = newNode;
+                    break;
+                }
+                current = current.next;
+            }
+        }
+
+        System.out.println("0 based indexing, inserted at " + index + ": " + this);
+    }
 
 }
