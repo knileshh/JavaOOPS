@@ -6,10 +6,10 @@ public class LinkedListDriver {
 
         SinglyLinkedList sl = new SinglyLinkedList();
 
-        System.out.println("Is empty? : " + sl.isEmpty());
 
         System.out.println("Insert at tail");
         sl.insertAtTail(555);
+        System.out.println("Is empty? : " + sl.isEmpty());
         sl.insertAtTail(444);
 
         System.out.println("Insert at Head");
@@ -29,6 +29,10 @@ public class LinkedListDriver {
 
         sl.insertAtIndex(2, 50);
 
+        System.out.println(sl.deleteAtIndex(0));
+
+        System.out.println("Is empty? : " + sl.isEmpty());
+        System.out.println(sl);
     }
 }
 
@@ -65,6 +69,10 @@ class SinglyLinkedList {
     void traverse() {
         Node current = head;
 
+        if (current == null) {
+            System.out.println("Linked List empty");
+        }
+
         while (current != null) {
             System.out.println(current.value);
             current = current.next;
@@ -76,6 +84,10 @@ class SinglyLinkedList {
         StringBuilder res = new StringBuilder();
 
         Node current = head;
+
+        if (current == null) {
+            System.out.println("Linked List is empty!");
+        }
 
         while (current != null) {
             int val = current.value;
@@ -152,4 +164,35 @@ class SinglyLinkedList {
         System.out.println("0 based indexing, inserted at " + index + ": " + this);
     }
 
+
+    int deleteAtIndex(int index) {
+       if (index < 0 || index >= this.size()) {
+           throw new IndexOutOfBoundsException("Index " + index + " out of bounds for size " + this.size());
+       } else {
+           Node t1 = head;
+           Node t2 = head.next;
+           int i = 0;
+
+           int res = 0;
+
+           if (t2 == null) {
+               res = t1.value;
+               head = null;
+           }
+
+           while (t2 != null) {
+               if (i == index-1) {
+                   res = t2.value;
+                   t1.next = t2.next;
+                   break;
+               }
+               t1 = t1.next;
+               t2 = t2.next;
+               i++;
+           }
+
+           return res;
+       }
+
+    }
 }
