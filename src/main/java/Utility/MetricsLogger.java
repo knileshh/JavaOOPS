@@ -3,7 +3,7 @@ package Utility;
 import java.util.function.Supplier;
 
 
-public class MetricsLogger {
+public final class MetricsLogger {
     public record MeasureResult<T> (String label, T result, double timeMs, double memoryKb) {}
 
     public final long start;
