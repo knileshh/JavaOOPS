@@ -1,4 +1,4 @@
-package DataStructures.LinkedList.Trees;
+package DataStructures.Trees;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
